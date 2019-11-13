@@ -1,4 +1,5 @@
 <button (click)="onReset($event)">Reset</button>
+<div>
 <wj-flex-grid  #orderDetailsPortfolioGrid [headersVisibility]="1" [itemsSource]="source">
    <wj-flex-grid-column [width]="35"
                                      [minWidth]="printing ? 0 : 35"
@@ -31,7 +32,14 @@
   <wj-flex-grid-column header="Country" binding="country"></wj-flex-grid-column>
   <wj-flex-grid-column header="Date" binding="date"></wj-flex-grid-column>
   <wj-flex-grid-column header="Amount" binding="amount"></wj-flex-grid-column>
-</wj-flex-grid><br><br>
+</wj-flex-grid>
+</div>
+<!-- <br><br> -->
 <!-- <wj-collection-view-navigator [cv]="source" [byPage]="true"></wj-collection-view-navigator> -->
-<br><br>
-<!-- <button (click)="onClick($event)">Filtered Rows</button> -->
+<!-- <br><br> -->
+<!-- <button (click)="onClick($event)">Get data</button> -->
+Edit all the cells in the amount column<br><br>
+And filter out using filter on Amount column<br><br>
+Check the two check boxes and click on reset<br><br>
+Now click on column filter and clear the filter <br><br>
+The issue is even the rows which are reset are getting back to old data
