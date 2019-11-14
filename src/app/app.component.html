@@ -29,17 +29,29 @@
                     </ng-template>
                 </wj-flex-grid-column>
   <wj-flex-grid-filter #filter (filterApplied)="onFilterApplied(filter, $event)"></wj-flex-grid-filter>
-  <wj-flex-grid-column header="Country" binding="country"></wj-flex-grid-column>
-  <wj-flex-grid-column header="Date" binding="date"></wj-flex-grid-column>
-  <wj-flex-grid-column header="Amount" binding="amount"></wj-flex-grid-column>
+  <wj-flex-grid-column header="Country" binding="country" isReadOnly="true"></wj-flex-grid-column>
+  <wj-flex-grid-column header="Date" binding="date" isReadOnly="true"></wj-flex-grid-column>
+  <wj-flex-grid-column header="Amount" binding="amount" ></wj-flex-grid-column>
 </wj-flex-grid>
 </div>
 <!-- <br><br> -->
 <!-- <wj-collection-view-navigator [cv]="source" [byPage]="true"></wj-collection-view-navigator> -->
 <!-- <br><br> -->
 <!-- <button (click)="onClick($event)">Get data</button> -->
-1.Edit all the cells in the amount column<br><br>
-2.And filter out using filter on Amount column<br><br>
-3.Check the two check boxes and click on reset<br><br>
-4.Now click on column filter and clear the filter <br><br>
-5.The issue is even the rows which are reset are getting back to old data
+<b>Secnario 1</b>
+<li>Edit all the rows in the amount column i.e 7 cells</li>
+<li>And click on filter of amount column, unselect some of them and click apply</li>
+<li>Now select one checkbox and click on Reset</li>
+<li><b>Issue:</b> Entire row disappers</li>
+
+<b>Secnario 2</b>
+<li>Click on filter of amount column, unselect some of them and click apply</li>
+<li>Start editing amount cells</li>
+<li><b>Issue:</b> Entire edited row disappers</li>
+
+<b>Secnario 3</b>
+<li>Edit all the rows in the amount column i.e 7 cells</li>
+<li>And click on filter of amount column, unselect some of them and click apply</li>
+<li>Now check select All checkbox and click on Reset</li>
+<li><b>Issue:</b> some row disappers, some stay</li>
+
