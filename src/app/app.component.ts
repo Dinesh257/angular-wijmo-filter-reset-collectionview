@@ -12,58 +12,46 @@ import * as wjcGridFilter from '@grapecity/wijmo.grid.filter';
 export class AppComponent {
  @ViewChild('orderDetailsPortfolioGrid') orderDetailsPortfolioGrid: wjcGrid.FlexGrid;
   source: wjcCore.CollectionView;
+  selectAllAssets: boolean;
   data =[
       {
         id:1,
-        isSelected: false,
         country: 'A',
         date:1,
         amount:1
       },
          {
         id:2,
-                isSelected: false,
-
         country: 'B',
         date:2,
         amount:2
       },
          {
         id:3,
-                isSelected: false,
-
         country: 'C',
         date:3,
         amount:3
       },
          {
         id:4,
-                isSelected: false,
-
         country: 'D',
         date:4,
         amount:4
       },
          {
         id:5,
-                isSelected: false,
-
         country: 'E',
         date:5,
         amount:5
       },
          {
         id:6,
-                isSelected: false,
-
         country: 'F',
         date:6,
         amount:6
       },
          {
         id:7,
-                isSelected: false,
-
         country: 'G',
         date:7,
         amount:7
@@ -87,22 +75,37 @@ export class AppComponent {
 
   }
   
-  onClick() {
-  }
+   public toggleAllAccountSelection(checkboxChecked: boolean): void {
+        if (this.source && this.source.itemCount > 0) {
+          this.selectAllAssets = checkboxChecked;
+            this.source._view.forEach((row) => {
+                    row.isSelected = checkboxChecked;
+            });
+        }
+    }
   public toggleSingleAccountSelection(selectedRow: any, checkboxChecked: boolean): void {
         if (this.source && this.source.itemCount > 0) {
             selectedRow.isSelected = checkboxChecked;
-            selectedRow.disableSelection = false;
         }
     }
+    
   onReset(){
       this.orderDetailsPortfolioGrid.rows.forEach((assetFromGrid, index) => {
             if (assetFromGrid.dataItem.isSelected) {
                 const assetDetail = this.data.find((portfolio) =>
                     portfolio.id === assetFromGrid.dataItem.id);
-                this.orderDetailsPortfolioGrid.rows[index].dataItem = assetDetail;
+                let item = this.orderDetailsPortfolioGrid.rows[index].dataItem; 
+                this.source.editItem(item);
+                Object.keys(item).forEach(i => {
+                  console.log( i);
+                  console.log( item[i]);
+                  console.log( assetDetail[i]);
+                  item[i] = assetDetail[i];
+                })
+                this.source.commitEdit();
             }
         });
+        this.selectAllAssets = false;
         this.orderDetailsPortfolioGrid.refresh();
   }
 
@@ -111,55 +114,42 @@ export class AppComponent {
   let data = [
       {
         id:1,
-        isSelected: false,
         country: 'A',
         date:1,
         amount:1
       },
          {
         id:2,
-                isSelected: false,
-
         country: 'B',
         date:2,
         amount:2
       },
          {
         id:3,
-                isSelected: false,
-
         country: 'C',
         date:3,
         amount:3
       },
          {
         id:4,
-                isSelected: false,
-
         country: 'D',
         date:4,
         amount:4
       },
          {
         id:5,
-                isSelected: false,
-
         country: 'E',
         date:5,
         amount:5
       },
          {
         id:6,
-                isSelected: false,
-
         country: 'F',
         date:6,
         amount:6
       },
          {
         id:7,
-                isSelected: false,
-
         country: 'G',
         date:7,
         amount:7
